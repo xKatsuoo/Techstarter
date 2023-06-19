@@ -1,0 +1,101 @@
+/* Font + Pictures + Text*/
+
+  body {
+    font-family: Trebuchet MS;
+    font-variant: small-caps;
+  
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .text {
+    max-width: fit-content;
+  }
+  img {
+    margin-right: 15px; 
+    margin-top: 15px;
+    margin-bottom: 15px;
+    max-width: 350px;
+  }
+  
+  .gmaps {
+    margin: auto;
+    display: block;
+  }
+  
+  /* H-Format */
+  h1, h2, h3 {
+    color: rgb(255, 255, 255);
+    font-family: Trebuchet MS;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 6rem;
+    margin-top: 35vh; 
+    text-decoration: underline;
+
+  }
+  
+  h2 { font-size: 3rem; }
+  
+  h3 { font-size: 2rem;
+    text-decoration: underline;
+  }
+
+/* Side Navigation */
+
+  body {
+    font-family: Trebuchet MS;
+    transition: background-color .5s;
+  }
+  
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

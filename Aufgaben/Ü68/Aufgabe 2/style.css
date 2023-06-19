@@ -1,0 +1,15 @@
+h1{
+    background-color: black;
+    color: #b300ff;
+    font-style: initial;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+p{
+    background-color: black;
+    color: #b300ff;
+    margin: 250px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}

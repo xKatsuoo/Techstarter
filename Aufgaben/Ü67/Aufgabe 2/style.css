@@ -1,0 +1,7 @@
+code {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    padding: 0 1em;
+    background-color: #eee;
+  }

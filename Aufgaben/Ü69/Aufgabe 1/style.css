@@ -1,0 +1,14 @@
+h1{
+
+    text-align: center;
+    text-decoration: underline;
+}
+
+.div1{
+    background-color: red;
+    width: 200px;
+    height: 100px;
+    margin: auto;
+    border: 10px solid black;
+    
+}

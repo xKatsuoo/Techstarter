@@ -1,0 +1,17 @@
+*{
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+}
+
+a:hover{
+
+    background-color: green;
+    
+}
+
+li{
+
+    text-decoration: underline overline;
+    text-decoration-color: red;
+}

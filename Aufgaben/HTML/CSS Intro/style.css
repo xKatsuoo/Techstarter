@@ -1,0 +1,53 @@
+* {
+    font-size: large;
+}
+
+p { 
+    color: blue; 
+}
+
+body {
+    /* background-color: darkseagreen; */
+    background-image: url("css_intro/images/egypt.jpg");
+    background-repeat: no-repeat;
+    /* background-repeat: repeat-x;
+    background-repeat: repeat-y; */
+    background-size: 10%;
+    background-position: 40% 20%;
+}
+
+#topmenu {
+    color: white;
+}
+
+#topmenu li {
+    list-style-type: circle;
+    font-size: small;
+}
+
+.p2 {
+    color: black;
+    font-style: italic;
+}
+
+/* color style */
+.p1 {
+    /* color: yellow; */
+    /* color: rgb(100%,0%,0%); */
+    /* color: rgb(128,0,128); */
+    /* color: #FF0000; */
+    
+    /* MIT TRANSPARENZ */
+    color: rgb(255,0,0,0.5);
+    /* color: rgb(100%,0%,0%,50%); */
+    /* color: #FF000080; */
+
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
