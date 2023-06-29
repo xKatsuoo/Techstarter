@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express();
+const { MongoClient } = require ("mongodb");
 
 // connection details
 const port = 3000;
 const hostname = 'localhost';
+
+// mongodb connection string
+const uri = "mongodb+srv://jasonkrimmel:jayjay211201@cluster0.afupon8.mongodb.net/?retryWrites=true&w=majority"
+const db = new MongoClient(uri);
+db.connect();
 
 // bodyparser middleware aktivieren
 app.use(express.json());
@@ -132,4 +138,11 @@ app.delete('/restaurant/:name', (req, res) => {
 // server starten
 app.listen(port, hostname, () => {
     console.log(`Server gestartet ${hostname}:${port}.`);
+});
+
+// verbindung zur datenbank trennen
+process.on('SIGINT', () => {
+    db.close();
+    console.log("database connection closed.");
+    process.exit();
 });
