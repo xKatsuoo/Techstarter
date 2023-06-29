@@ -7,7 +7,7 @@ const port = 3000;
 const hostname = 'localhost';
 
 // mongodb connection string
-const uri = "mongodb+srv://jasonkrimmel:jayjay211201@cluster0.afupon8.mongodb.net/?retryWrites=true&w=majority"
+const uri = "mongodb+srv://username:/password@cluster0.afupon8.mongodb.net/?retryWrites=true&w=majority"
 const db = new MongoClient(uri);
 db.connect();
 
