@@ -1,15 +1,23 @@
 const express = require('express');
 const app = express();
-const { MongoClient } = require ("mongodb");
+const sqlite3 = require('better-sqlite3')
+const db = new sqlite3('restaurants.db');
+
+// Create the "restaurants" table if it doesn't exist
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS restaurants (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    adresse TEXT NOT NULL,
+    kategorie TEXT NOT NULL
+  )
+`;
+
+db.exec(createTableQuery);
 
 // connection details
 const port = 3000;
 const hostname = 'localhost';
-
-// mongodb connection string
-const uri = "mongodb+srv://username:/password@cluster0.afupon8.mongodb.net/?retryWrites=true&w=majority"
-const db = new MongoClient(uri);
-db.connect();
 
 // bodyparser middleware aktivieren
 app.use(express.json());
@@ -56,93 +64,75 @@ function delRestaurant(name) {
 /* API ENDPUNKTE */
 // alle restaurants abfragen
 app.get('/restaurants', (_, res) => {
+    const query = db.prepare('SELECT * FROM restaurants');
+    const restaurants = query.all();
     res.send(restaurants);
-});
-
-// bestimmtes restaurant abfragen
-app.get('/restaurant/:name', (req, res) => {
-    // variable fuer suchergebnis anlegen (undefined)
-    let result;
-    // suche nach restaurant in liste
-    restaurants.forEach((elem) => {
-        if (elem.name === req.params.name) {
-            // wenn element in liste gefunden, speichere in variable restaurant
-            result = elem;
-        }
-    });
-    // gib ergebnis der suche zurück
+  });
+  
+  // bestimmtes restaurant abfragen
+  app.get('/restaurant/:name', (req, res) => {
+    const query = db.prepare('SELECT * FROM restaurants WHERE name = ?');
+    const result = query.get(req.params.name);
     if (result) {
-        res.send(result);
+      res.send(result);
     } else {
-        res.status(404);
-        res.send("dieses restaurant existiert nicht");
+      res.status(404);
+      res.send('Dieses Restaurant existiert nicht');
     }
-});
-
-// neues restaurant hinzufügen
-app.post('/restaurant', (req, res) => {
-    let r = req.body;
-    // prüfe, ob alle erforderlichen daten vorhanden sind
+  });
+  
+  // neues restaurant hinzufügen
+  app.post('/restaurant', (req, res) => {
+    const r = req.body;
     if (!r.name || !r.adresse || !r.kategorie) {
+      res.status(400);
+      res.send('Objekt ist nicht vollständig! Name, Adresse oder Kategorie fehlt!');
+    } else {
+      const query = db.prepare('SELECT * FROM restaurants WHERE name = ?');
+      const existingRestaurant = query.get(r.name);
+      if (!existingRestaurant) {
+        const insert = db.prepare('INSERT INTO restaurants (name, adresse, kategorie) VALUES (?, ?, ?)');
+        insert.run(r.name, r.adresse, r.kategorie);
+        res.status(201);
+        res.send('Restaurant wurde hinzugefügt');
+      } else {
+        res.status(409);
+        res.send('Restaurant ist bereits gespeichert!');
+      }
+    }
+  });
+  
+  // bestimmtes restaurant aktualisieren
+  app.put('/restaurant/:name', (req, res) => {
+    const query = db.prepare('SELECT * FROM restaurants WHERE name = ?');
+    const existingRestaurant = query.get(req.params.name);
+    if (existingRestaurant) {
+      const r = req.body;
+      if (r.name && r.adresse && r.kategorie) {
+        const update = db.prepare('UPDATE restaurants SET name = ?, adresse = ?, kategorie = ? WHERE name = ?');
+        update.run(r.name, r.adresse, r.kategorie, req.params.name);
+        res.send(r);
+        console.log(`Aktualisiere: ${req.params.name}: ${r.name}, ${r.adresse}, ${r.kategorie}.`);
+      } else {
         res.status(400);
-        res.send("objekt ist nicht vollständig! name, adresse oder kategorie fehlt!");
+        res.send('Daten unvollständig, nicht aktualisiert.');
+      }
     } else {
-        // prüfe, ob element bereits in liste
-        let e = exists(r.name);
-        if (!e) {
-            // nicht vorhanden, füge element hinzu
-            restaurants.push(r);
-            res.status(201);
-            res.send("restaurant wurde hinzugefügt");
-        } else {
-            // element bereits vorhanden
-            res.status(409);
-            res.send("restaurant ist bereits gespeichert!");
-        }
+      res.status(404);
+      res.send('Restaurant nicht gefunden.');
     }
-});
-
-// bestimmtes restaurant aktualisieren
-app.put('/restaurant/:name', (req, res) => {
-    // prüfe, ob restaurant in liste vorhanden ist
-    let i = getIndex(req.params.name);
-    if (i != -1) {
-        const r = req.body;
-        if (r.name && r.adresse && r.kategorie) {
-            // ersetze alt durch neu
-            restaurants[i] = r;
-            // neues Restaurant zurückgeben
-            res.send(r);
-            console.log(`Aktualisiere: ${req.params.name}: ${r.name}, ${r.adresse}, ${r.kategorie}.`);
-        } else {
-            res.status(400);
-            res.send("Daten unvollständig, nicht aktualisiert.");
-        }
-    } else { // restaurant nicht existent
-        res.status(404);
-        res.send("Restaurant nicht gefunden.")
-    }
-});
-
-// bestimmtes restaurant löschen
-app.delete('/restaurant/:name', (req, res) => {
-    if (getIndex(req.params.name) != -1) {
-        let del = delRestaurant(req.params.name);
-        res.send("Folgendes Restaurant wurde gelöscht: " + JSON.stringify(del));
-    } else {
-        res.status(404);
-        res.send("Restaurant ist nicht vorhanden.");
-    }
-});
+  });
+  
+  // bestimmtes restaurant löschen
+  app.delete('/restaurant/:name', (req, res) => {
+    const query = db.prepare('SELECT * FROM restaurants WHERE name = ?');
+    const existingRestaurant = query.get(req.params.name);
+    if (existingRestaurant) {
+      const del = db.prepare('DELETE FROM restaurants WHERE name = ?');
+     
+}});  
 
 // server starten
 app.listen(port, hostname, () => {
     console.log(`Server gestartet ${hostname}:${port}.`);
-});
-
-// verbindung zur datenbank trennen
-process.on('SIGINT', () => {
-    db.close();
-    console.log("database connection closed.");
-    process.exit();
 });
