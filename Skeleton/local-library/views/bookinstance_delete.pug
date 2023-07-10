@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Delete BookInstance
+  if bookinstance
+    p Are you sure you want to delete this book instance?
+    form(action=bookinstance.url + '/delete' method='POST')
+      input(type='hidden' name='bookinstanceid' value=bookinstance._id)
+      input(type='submit' value='Delete')
+  else
+    p BookInstance not found.
+    a(href='/catalog/bookinstances') Return to BookInstance List

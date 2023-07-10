@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Delete Book
+  if book
+    if bookinstances && bookinstances.length > 0
+      p This book cannot be deleted as there are associated book instances:
+      ul
+        each bookinstance in bookinstances
+          li #{bookinstance.book.title} (#{bookinstance.status})
+    else
+      p Are you sure you want to delete the book "#{book.title}"?
+      form(action=book.url + '/delete' method='POST')
+        input(type='hidden' name='bookid' value=book._id)
+        input(type='submit' value='Delete')
+  else
+    p Book not found.
+    a(href='/catalog/books') Return to Book List
