@@ -1,0 +1,15 @@
+{
+  "name": "u86",
+  "version": "1.0.0",
+  "description": "Fabio_Aufgabe",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha Test"
+  },
+  "author": "Jason Krimmel",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
