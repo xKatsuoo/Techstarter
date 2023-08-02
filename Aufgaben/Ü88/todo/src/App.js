@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
+
 
 const TodoApp = () => {
   const [tasks, setTasks] = useState([]);
@@ -29,15 +34,15 @@ const TodoApp = () => {
 
   return (
     <div className='container'>
-      <h1>Meine Aufgabenliste</h1>
+      <h1>My to-do list</h1>
       <div>
-        <input
+        <TextField id="filled-basic" label="Add new Task" variant="filled"
           type="text"
           value={newTask}
           onChange={handleInputChange}
-          placeholder="Neue Aufgabe hinzufügen"
+          placeholder="Add a new task"
         />
-        <button onClick={addTask}>Hinzufügen</button>
+        <Button variant="contained" color='success' onClick={addTask}>Add</Button>
       </div>
       <ul>
         {tasks.map((task, index) => (
@@ -53,7 +58,7 @@ const TodoApp = () => {
           </li>
         ))}
       </ul>
-      <button onClick={removeCompletedTasks}>Erledigte Aufgaben entfernen</button>
+      <IconButton aria-label="delete" color='error' onClick={removeCompletedTasks}> <DeleteIcon />Done</IconButton>
     </div>
   );
 };

@@ -39,11 +39,11 @@
 
 .container {
   text-decoration: underline;
-  dipslay: flex;
   justify-content: center;
   text-align: center;
 }
 
 li {
-  list-style: inside;
+  list-style: none;
 }
+
