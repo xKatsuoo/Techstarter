@@ -1,3 +1,5 @@
 test
 social-media-k
 Ü108
+.terraform*
+terraform.tfstate*
