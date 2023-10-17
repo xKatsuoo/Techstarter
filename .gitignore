@@ -1,5 +1,11 @@
 test
 social-media-k
 Ü108
-.terraform*
-terraform.tfstate*
+
+# Local .terraform directories
+**/.terraform*
+
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
