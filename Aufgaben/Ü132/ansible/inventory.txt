@@ -1,0 +1,6 @@
+[monitorserver]
+db_server   ansible_host=52.59.209.215   ansible_user=ubuntu  ansible_ssh_private_key_file=/home/jason/ubuntu-budgie.pem
+
+[nodeservers]
+server1  ansible_host=3.76.30.71  ansible_user=ubuntu  ansible_ssh_private_key_file=/home/jason/ubuntu-budgie.pem
+server2  ansible_host=3.120.27.4  ansible_user=ubuntu  ansible_ssh_private_key_file=/home/jason/ubuntu-budgie.pem
