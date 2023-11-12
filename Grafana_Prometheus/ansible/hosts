@@ -1,0 +1,2 @@
+prometheus ansible_host=3.71.184.68 ansible_user=ubuntu ansible_ssh_private_key_file=/home/jason/ubuntu-budgie.pem
+exporter ansible_host=3.74.149.197 ansible_user=ubuntu ansible_ssh_private_key_file=/home/jason/ubuntu-budgie.pem
