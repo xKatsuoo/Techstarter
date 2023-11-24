@@ -1,0 +1,15 @@
+name: Self-Hosted Runner Demo
+run-name: ${{ github.actor }} is testing workflow with jobs 🚀
+on: [push]
+jobs:
+  my_first_job:
+    name: My first job
+    runs-on: ["self-hosted", "Linux", "X64"]
+    steps:
+      - run: echo "🎉 Hello from job 1/2!"
+  my_second_job:
+    name: My second job
+    runs-on: ["self-hosted", "Linux", "X64"]
+    needs: my_first_job
+    steps:
+      - run: echo "🎉 Hello from job 2/2!"
