@@ -1,0 +1,42 @@
+pipeline {
+    agent {
+        label 'slave1'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building.....!'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...!'
+            }
+        }
+        stage('Confirm Deploy') {
+            steps {
+                timeout(time: 60, unit: 'SECONDS') {
+                    input(message: 'Ready to Deploy!', ok: 'LEEERROOOYY Jenkins!')
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+        stage('Confirm to Production') {
+            steps {
+                timeout(time: 60, unit: 'SECONDS') {
+                    input(message: 'Ready to Prod?', ok: 'LEEERROOOYY Jenkins!')
+                }
+            }
+        }
+        stage('Production') {
+            steps {
+                echo 'Deploying to Production...'
+                }
+            }
+        }
+}
