@@ -11,3 +11,4 @@ Markdown
 # .tfstate files
 *.tfstate
 *.tfstate.*
+cicd-demo
