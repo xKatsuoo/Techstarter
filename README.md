@@ -1,6 +1,6 @@
-﻿# Course Files
+﻿# Techstarter AWS-23-02
 
-This repository contains the course files for the Techstarter.
+This repository contains the course files for the Techstarter AWS Course.
 
 ## Table of Contents
 
