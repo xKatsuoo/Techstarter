@@ -1,6 +1,6 @@
-﻿# Techstarter AWS-23-02
+﻿# Techstarter further education to become a "DevOps Cloud Engineer"
 
-This repository contains the course files for the Techstarter AWS Course.
+This repository contains the course files for the Techstarter Course.
 
 ## Table of Contents
 
@@ -8,4 +8,4 @@ This repository contains the course files for the Techstarter AWS Course.
 
 ## Description
 
-Here you can find all my own files from the Course AWS-23-02.
+Here you can find all my own projects/tasks from the Course.
