@@ -3,6 +3,8 @@ social-media-k
 Ü108
 Ü130
 Markdown
+Template
+Ü147
 
 # Local .terraform directories
 **/.terraform*
@@ -12,3 +14,5 @@ Markdown
 *.tfstate
 *.tfstate.*
 cicd-demo
+
+
