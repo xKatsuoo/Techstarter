@@ -13,6 +13,6 @@ Template
 # .tfstate files
 *.tfstate
 *.tfstate.*
-cicd-demo
+
 
 
